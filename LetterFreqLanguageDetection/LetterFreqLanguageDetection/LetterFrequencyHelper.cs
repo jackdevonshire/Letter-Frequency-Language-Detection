@@ -16,7 +16,7 @@ namespace LetterFreqLanguageDetection
             var jsonFilePath = Path.Combine(Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName, "frequencies.json");
             var json = File.ReadAllText(jsonFilePath);
             
-            return JsonConvert.DeserializeObject<LetterFrequencies>(json)!;
+            return JsonConvert.DeserializeObject<LetterFrequencies>(json);
         }
 
         public LetterFrequencies GetLanguageLetterFrequencies()
