@@ -10,4 +10,4 @@ I have no idea how beneficial this is. I assume whoever made the "Detect Languag
 
 With the above said, this is pretty fast, and whilst it occassionally gives a wonky result, I've found it to be pretty accurate even on short sentences.
 
-Usually the first result takes ~12ms to complete, but subsequent analysis are all seem to be sub 1ms, even for larger texts. I haven't figured out why yet, I assume it is to do with the Accord.Statstics package I'm using to conduct the Chi-Squared tests. Maybe it loads in data for the given degrees of freedom and caches it? I will update this if I find out!
+Most results, regardless of the text size will be available in under ~1ms. Generally the first result takes around ~12ms to compute, from some brief testing I believe this is because the Accord.Statistics package I use for the Chi-Squared tests is caching values based on the degrees of freedom provided in the first run, to be used in subsequent runs - although I haven't 100% verified this.
