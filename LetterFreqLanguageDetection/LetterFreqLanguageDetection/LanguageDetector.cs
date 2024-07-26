@@ -15,7 +15,7 @@ namespace LetterFreqLanguageDetection
         public DetectionResult DetectLanguageForString(string inputString)
         {
             var timer = new Stopwatch();
-            timer.Start();
+            timer.Restart();
             
             var languageFrequencies = _letterFreqHelper.GetLanguageLetterFrequencies();
             var inputStringFrequencies = _letterFreqHelper.GetLetterFrequenciesForText(inputString);
@@ -36,7 +36,7 @@ namespace LetterFreqLanguageDetection
             {
                 EstimatedLanguage = pValuesPerLanguage.MaxBy(x => x.Value).Key,
                 PValuesByLanguage = pValuesPerLanguage,
-                DetectionTimeMs = timer.ElapsedMilliseconds
+                DetectionTimeMs = timer.Elapsed.TotalMicroseconds * 0.001
             };
         }
     }

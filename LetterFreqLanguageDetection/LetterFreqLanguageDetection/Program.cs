@@ -3,5 +3,12 @@
 using LetterFreqLanguageDetection;
 
 var languageDetector = new LanguageDetector();
-var result = languageDetector.DetectLanguageForString("This is some test english text");
-Console.WriteLine(result.EstimatedLanguage);
+
+while (true)
+{
+    Console.Write("---------------\n");
+    Console.Write("Enter text to analyse: ");
+    var inputText = Console.ReadLine();
+    var result = languageDetector.DetectLanguageForString(inputText);
+    Console.WriteLine($"[{result.DetectionTimeMs}ms] Estimated Language: {result.EstimatedLanguage}");
+}
