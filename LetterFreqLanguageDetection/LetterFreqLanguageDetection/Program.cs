@@ -1,6 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-
-using LetterFreqLanguageDetection;
+﻿using LetterFreqLanguageDetection;
 
 var languageDetector = new LanguageDetector();
 

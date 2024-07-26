@@ -5,8 +5,8 @@ namespace LetterFreqLanguageDetection
 {
     public class LanguageDetector
     {
-        private LetterFrequencyHelper _letterFreqHelper;
-
+        private readonly LetterFrequencyHelper _letterFreqHelper;
+        
         public LanguageDetector()
         {
             _letterFreqHelper = new LetterFrequencyHelper();
