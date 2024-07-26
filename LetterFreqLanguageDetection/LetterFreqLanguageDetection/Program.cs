@@ -2,4 +2,5 @@
 
 using LetterFreqLanguageDetection;
 
-var test = new LetterFrequencyHelper();
+var letterFrequencyHelper = new LetterFrequencyHelper();
+letterFrequencyHelper.GetLetterFrequenciesForText("This is some test text");

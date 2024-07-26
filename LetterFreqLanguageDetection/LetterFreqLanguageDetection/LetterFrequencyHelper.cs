@@ -5,8 +5,8 @@ namespace LetterFreqLanguageDetection
 {
     public class LetterFrequencyHelper
     {
-        private LetterFrequencies _letterFrequencies;
-        public LetterFrequencyHelper(LetterFrequencies letterFrequencies)
+        private readonly LetterFrequencies _letterFrequencies;
+        public LetterFrequencyHelper()
         {
             _letterFrequencies = LoadLanguageFrequencies();
         }
@@ -24,9 +24,34 @@ namespace LetterFreqLanguageDetection
             return _letterFrequencies;
         }
 
-        public Dictionary<char, double> GetLetterFrequenciesForText()
+        public Dictionary<char, double> GetLetterFrequenciesForText(string inputString)
         {
-            throw new NotImplementedException();
+            var allowedCharacters = _letterFrequencies.AllLetters;
+            var letterCount = new Dictionary<char, int>();
+            foreach (var allowedCharacter in allowedCharacters)
+            {
+                letterCount.Add(allowedCharacter, 0);
+            }
+
+            var validCharacterCount = 0;
+            foreach (var character in inputString)
+            {
+                if (letterCount.ContainsKey(character))
+                {
+                    letterCount[character]++; 
+                    validCharacterCount++;
+                }
+            }
+            
+            // Now get the actual frequencies
+            var letterFrequencies = new Dictionary<char, double>();
+            foreach (var letter in letterCount)
+            {
+                double currentLetterFreq = ((double)letter.Value / (double)validCharacterCount) * 100;
+                letterFrequencies.Add(letter.Key, currentLetterFreq);
+            }
+
+            return letterFrequencies;
         }
     }
 }
