@@ -1,4 +1,5 @@
-﻿using Accord.Statistics.Testing;
+﻿using System.Diagnostics;
+using Accord.Statistics.Testing;
 
 namespace LetterFreqLanguageDetection
 {
@@ -13,6 +14,9 @@ namespace LetterFreqLanguageDetection
 
         public DetectionResult DetectLanguageForString(string inputString)
         {
+            var timer = new Stopwatch();
+            timer.Start();
+            
             var languageFrequencies = _letterFreqHelper.GetLanguageLetterFrequencies();
             var inputStringFrequencies = _letterFreqHelper.GetLetterFrequenciesForText(inputString);
             
@@ -25,11 +29,14 @@ namespace LetterFreqLanguageDetection
                 var chiSquareTest = new ChiSquareTest(currentLanguageFreqs.ToArray(), inputFreqs.ToArray(), 1);
                 pValuesPerLanguage.Add(language.LanguageName, chiSquareTest.PValue);
             }
-
+            
+            timer.Stop();
+            
             return new DetectionResult
             {
                 EstimatedLanguage = pValuesPerLanguage.MaxBy(x => x.Value).Key,
-                PValuesByLanguage = pValuesPerLanguage
+                PValuesByLanguage = pValuesPerLanguage,
+                DetectionTimeMs = timer.ElapsedMilliseconds
             };
         }
     }
@@ -39,4 +46,6 @@ public class DetectionResult
 {
     public string EstimatedLanguage { get; set; }
     public Dictionary<string, double> PValuesByLanguage { get; set; }
+    
+    public double DetectionTimeMs { get; set; }
 }
