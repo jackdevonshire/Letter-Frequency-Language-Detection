@@ -2,5 +2,6 @@
 
 using LetterFreqLanguageDetection;
 
-var letterFrequencyHelper = new LetterFrequencyHelper();
-letterFrequencyHelper.GetLetterFrequenciesForText("This is some test text");
+var languageDetector = new LanguageDetector();
+var result = languageDetector.DetectLanguageForString("This is some test english text");
+Console.WriteLine(result.EstimatedLanguage);

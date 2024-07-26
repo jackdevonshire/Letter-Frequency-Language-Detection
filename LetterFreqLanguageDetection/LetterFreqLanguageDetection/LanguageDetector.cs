@@ -1,4 +1,6 @@
-﻿namespace LetterFreqLanguageDetection
+﻿using Accord.Statistics.Testing;
+
+namespace LetterFreqLanguageDetection
 {
     public class LanguageDetector
     {
@@ -17,10 +19,18 @@
             var pValuesPerLanguage = new Dictionary<string, double>();
             foreach (var language in languageFrequencies.LanguageLetterFrequencies)
             {
-                // Calculate chi score for each language
+                var currentLanguageFreqs = language.LetterFrequenciesRaw;
+                var inputFreqs = inputStringFrequencies;
+                
+                var chiSquareTest = new ChiSquareTest(currentLanguageFreqs.ToArray(), inputFreqs.ToArray(), 1);
+                pValuesPerLanguage.Add(language.LanguageName, chiSquareTest.PValue);
             }
 
-            throw new NotImplementedException();
+            return new DetectionResult
+            {
+                EstimatedLanguage = pValuesPerLanguage.MaxBy(x => x.Value).Key,
+                PValuesByLanguage = pValuesPerLanguage
+            };
         }
     }
 }
