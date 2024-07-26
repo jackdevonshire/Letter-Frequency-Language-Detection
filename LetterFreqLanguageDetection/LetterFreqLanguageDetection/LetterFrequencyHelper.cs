@@ -37,6 +37,7 @@ namespace LetterFreqLanguageDetection
 
         public List<double> GetLetterFrequenciesForText(string inputString)
         {
+            inputString = inputString.ToLower();
             var orderedAllowedCharacters = _letterFrequencies.AllLetters;
             var letterCount = new Dictionary<char, int>();
             foreach (var allowedCharacter in orderedAllowedCharacters)
