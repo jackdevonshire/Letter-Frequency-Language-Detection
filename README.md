@@ -1,4 +1,4 @@
-# A Leightweight Language Estimation Tool
+# A Lightweight Language Estimation Tool
 Using letter frequencies scraped from [Wikipedia](https://en.wikipedia.org/wiki/Letter_frequency), this tool conducts a Chi Squared test against inputted text and all the available language frequencies, and returns the name of the language with the highest P-Score.
 
 ## Why?
